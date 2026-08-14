@@ -8,9 +8,6 @@ import com.example.JavaProject.Hostelproject.Entity.SessionEntity;
 import com.example.JavaProject.Hostelproject.Entity.UserEntity;
 import com.example.JavaProject.Hostelproject.RepoSitory.SessionRepository;
 import com.example.JavaProject.Hostelproject.RepoSitory.UserRepository;
-import com.example.JavaProject.Hostelproject.Services.JwtServices;
-import com.example.JavaProject.Hostelproject.Services.SessionService;
-import com.example.JavaProject.Hostelproject.Services.userService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,8 +15,6 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,7 +25,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -42,7 +36,7 @@ public class AuthService {
     @Autowired
     SessionService sessionService;
     @Autowired
-    userService userService1;
+    UserService userService1;
     @Autowired
     JwtServices jwtServices;
     @Autowired
@@ -130,10 +124,11 @@ public class AuthService {
            sessionRepository.deleteById(isExist.getId());
        }
 
+
             String accessTokenJti = jwtServices.getJtiFromToken(accessToken);
             String refreshTokenJti = jwtServices.getJtiFromToken(refreshToken);
-       redisTemplate.opsForValue().set(refreshTokenJti,"refreshTokenJti", Duration.ofSeconds(60));
-       redisTemplate.opsForValue().set(accessTokenJti,"accessTokenJti", Duration.ofSeconds(60));
+       redisTemplate.opsForValue().set(refreshTokenJti,"refreshTokenJti", Duration.ofSeconds(1000L*60*24*30*6));
+       redisTemplate.opsForValue().set(accessTokenJti,"accessTokenJti", Duration.ofSeconds(1000L*130));
 
 
         } catch (Exception e) {

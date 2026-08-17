@@ -42,6 +42,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
             if (id != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
+//                we have to implements cache here
                 UserEntity userEntity = userService.getUserById(id);
                 Authentication authentication = new UsernamePasswordAuthenticationToken(userEntity, null, userEntity.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);

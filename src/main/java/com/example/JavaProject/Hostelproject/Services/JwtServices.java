@@ -30,7 +30,7 @@ public class JwtServices {
                 .claim("email",user.getEmail())
                 .claim("password",user.getPassword())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis()+1000L*130)).signWith(generateKey()).compact();
+                .expiration(new Date(System.currentTimeMillis()+1000L*60*24)).signWith(generateKey()).compact();
 
     }
 

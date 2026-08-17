@@ -50,7 +50,7 @@ public class UserEntity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> result = new ArrayList<>();
-        result.add( new SimpleGrantedAuthority(getUserRole()+"ROLE"));
+        result.add( new SimpleGrantedAuthority(getUserRole().name()));
         return result;
     }
 

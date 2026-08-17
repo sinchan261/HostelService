@@ -1,5 +1,6 @@
 package com.example.JavaProject.Hostelproject.Configuration;
 
+import com.example.JavaProject.Hostelproject.Enum.UserTypeEnum;
 import com.example.JavaProject.Hostelproject.Filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,7 @@ public class webConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
         httpSecurity.authorizeHttpRequests(e->{
             e.requestMatchers("/auth/login","/auth/signup").permitAll()
+                    .requestMatchers("/auth/student/**").hasAuthority("STUDENT")
                     .requestMatchers("/auth/**").authenticated();
         }).formLogin(e->e.disable()).csrf(e->e.disable())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

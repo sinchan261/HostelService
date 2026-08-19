@@ -19,7 +19,6 @@ import java.util.List;
 @Service
 
 public class StudentService {
-
     @Autowired
     StudentRepository studentRepository;
     @Autowired
@@ -36,16 +35,25 @@ public class StudentService {
 //         find user by id
         UserEntity users = userRepository.findById(id).orElseThrow();
 
-            List<MobileEntity> mobileEntityList = new ArrayList<>();
-            if (studentDto.getMobileNo() != null) {
-                mobileEntityList.stream().map(e->modelMapper.map(e, MobileEntity.class)).toList();
-
-            }
+//            List<MobileEntity> mobileEntityList = new ArrayList<>();
+//            if (studentDto.getMobileNo() != null) {
+//                mobileEntityList = studentDto.getMobileNo().stream().map(e->modelMapper.map(e, MobileEntity.class)).toList();
+//
+//            }
             //creating student entity
             StudentEntity studentEntity = StudentEntity.builder().address(studentDto.getAddress()).collegeName(studentDto.getCollegeName())
                     .guardianName(studentDto.getGuardianName())
-                    .pgLocation(studentDto.getPgLocation()).roomNo(studentDto.getRoomNo()).users(users).
-            build();
+                    .pgLocation(studentDto.getPgLocation()).roomNo(studentDto.getRoomNo()).users(users)
+                    .build();
+//
+
+            if( studentDto.getMobileNo() != null){
+                studentDto.getMobileNo().forEach(e->{
+                    MobileEntity mobile = modelMapper.map(e,MobileEntity.class);
+                    System.out.println(mobile.getMobileNo());
+                    studentEntity.addMobileNo(mobile);
+                });
+            }
             StudentEntity student = studentRepository.save(studentEntity);
 
 
@@ -53,4 +61,6 @@ public class StudentService {
             throw new RuntimeException(e);
         }
     }
+
+
 }

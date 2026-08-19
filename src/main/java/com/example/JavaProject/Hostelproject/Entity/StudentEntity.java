@@ -21,14 +21,17 @@ public class StudentEntity {
     private String address;
     private String guardianName;
     private String collegeName;
-
+    @Builder.Default
     @OneToMany(mappedBy="student",cascade= {CascadeType.REMOVE, CascadeType.PERSIST},fetch = FetchType.LAZY)
     private List<MobileEntity> mobileNo = new ArrayList<>();
     @OneToOne
     private UserEntity users;
     private String roomNo;
     private String pgLocation;
-
+  public void addMobileNo(MobileEntity mobileEntity){
+      this.mobileNo.add(mobileEntity);
+      mobileEntity.setStudent(this);
+  }
     @CreationTimestamp
     private LocalDateTime creationTimeStamp;
 }

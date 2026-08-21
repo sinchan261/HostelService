@@ -65,5 +65,8 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
+//    @GetMapping("/forgetPassword")
+//
+
 
 }

@@ -19,7 +19,7 @@ public class webConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
         httpSecurity.authorizeHttpRequests(e->{
             e.requestMatchers("/auth/login","/auth/signup").permitAll()
-                    .requestMatchers("/auth/student/**").hasAuthority("STUDENT")
+                    .requestMatchers("/auth/student/**","/payment/**").hasAuthority("STUDENT")
                     .requestMatchers("/auth/**").authenticated();
         }).formLogin(e->e.disable()).csrf(e->e.disable())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

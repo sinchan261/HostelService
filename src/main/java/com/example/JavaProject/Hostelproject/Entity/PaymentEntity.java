@@ -26,7 +26,6 @@ public class PaymentEntity {
     private Integer month;
     private Integer year;
     private LocalDateTime time;
-
     @Enumerated(value=EnumType.STRING)
     private PaymentStatus paymentStatus;
     private BigDecimal amount;

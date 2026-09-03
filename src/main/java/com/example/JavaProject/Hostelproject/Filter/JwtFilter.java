@@ -56,11 +56,11 @@ public class JwtFilter extends OncePerRequestFilter {
                 if( redisTemplate.opsForValue().get(key) ==null){
                      userEntity = userService.getUserById(id);
                     redisTemplate.opsForValue().set(key,userEntity, Duration.ofDays(1));
-                    System.out.println("UserEntity is not catached"+userEntity);
+                    System.out.println("UserEntity is not catached: "+userEntity);
                 }else{
                    Object object=  redisTemplate.opsForValue().get(key);
                    userEntity = modelMapper.map(object, UserEntity.class);
-                   System.out.println("UserEntity is now catached"+userEntity.getName());
+                   System.out.println("UserEntity is now catached: "+userEntity.getName());
                 }
 
 

@@ -2,14 +2,15 @@ package com.example.JavaProject.Hostelproject.Entity;
 
 import com.example.JavaProject.Hostelproject.Enum.PaymentStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
 @Table(
         name = "payment",
         uniqueConstraints ={
@@ -19,10 +20,11 @@ import java.time.LocalDateTime;
                 )
         }
 )
+@AllArgsConstructor
 public class PaymentEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private Integer month;
     private Integer year;
     private LocalDateTime time;

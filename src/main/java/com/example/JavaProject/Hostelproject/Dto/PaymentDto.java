@@ -3,10 +3,14 @@ package com.example.JavaProject.Hostelproject.Dto;
 import com.example.JavaProject.Hostelproject.Entity.UserEntity;
 import com.example.JavaProject.Hostelproject.Enum.PaymentStatus;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class PaymentDto {
     private Integer month;
     private Integer year;

@@ -18,8 +18,7 @@ public class PaymentController {
     @PostMapping(value = "/save",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
-    public ResponseEntity<Object>  savePost(@RequestPart("payment") PaymentDto paymentDto,
-                                            @RequestPart("image")MultipartFile image
+    public ResponseEntity<Object>  savePost(@RequestPart("payment") PaymentDto paymentDto, @RequestPart("image")MultipartFile image
     ){
         MsgDto response = paymentService.savePayment(paymentDto,image);
        return new ResponseEntity<>(HttpStatus.ACCEPTED).ok(response);
